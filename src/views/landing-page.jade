@@ -1,0 +1,68 @@
+extends layout
+block content
+  include ./header.jade
+  script(type='text/javascript', src='/vendor/jquery-1.10.2.js')
+  script(type='text/javascript').
+    function randomRoomName() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for( var i=0; i < 10; i++ )
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    };
+
+    $(document).ready(function(e) {
+
+      var chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+      if (!chrome) {
+        $('#main').addClass('grayscale');
+        $('.block-ui').show();
+      }
+
+      $("#join").bind("click", function(e) {
+        e.preventDefault()
+        if (!$('#room_id').val()) return $("#host").trigger('click')
+        conferenceName = $('#room_id').val()
+        location.href = "/conferences/" + conferenceName
+      });
+
+      $("#host").bind("click", function(e) {
+        e.preventDefault()
+        conferenceName = randomRoomName()
+        location.href = "/conferences/" + conferenceName
+      });
+
+    });
+  div#hero
+    h2
+      | Real Time <span>Conferences for</span> Everyone.
+    h2.strong Any Time. Any Place. Any Language.
+    div#join_or_host
+      input#room_id(type='text', placeholder='Enter an Existing Conference ID...')
+      button#join Join
+      span or 
+      button#host Create New Conference
+    div#active_conferences.constrain
+      h3 Browse Active Speakers
+      if topics.length
+        ul
+          each room, i in topics
+            if room.topic
+              li.room-item
+                span #{room.topic}
+                a(href='/conferences/#{room.id}') Join #{room.members} Others
+      else
+        div.oops Sorry, there are no active conferences now.
+  div#features
+    div.constrain
+      ul.feature-list
+        li Deliver real-time talks and seminars
+        li Transcribe your voice for your audience's reference
+        li Give your audience the floor and answer questions
+      ul.feature-list
+        li Translate speaker's transcribed voice into your language
+        li Join public rooms and learn anything
+        li Copy and print entire seminars for reading later
+  include ./footer.jade
