@@ -5,7 +5,7 @@ author: gordon hall
 server.coffee - starts application server
 ###
 
-nko              = require "nko", "MgCWyiZUBOtGD97E"
+# nko              = require "nko", "MgCWyiZUBOtGD97E"
 fs               = require "fs"
 {createServer}   = require "http"
 express          = require "express"

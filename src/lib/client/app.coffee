@@ -9,7 +9,6 @@ classes     = require "./classes.coffee"
 events      = require "./events.coffee"
 currentUser = localStorage.getItem "user-uuid"
 
-# instantiate ember application
 module.exports = window.Conf = Conf = {}
 
 # set room name

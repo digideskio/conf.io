@@ -91,5 +91,5 @@ module.exports = (io) ->
         (socket.broadcast.to room).emit "participant-left", 
           socket: socket.id
 
-module.exports.topics = topics
+# module.exports.topics = topics
 module.exports.topics = participants
