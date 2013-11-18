@@ -27,7 +27,7 @@ You will need to generate a Google Translate API key and place it as the value
 of the `key` parameter on line 82 in *lib/client/classes.coffee*. Example:
 
 ```coffeescript
-translate: (text, language_from=en, language_to=en) ->
+translate: (text, language_from=""en", language_to="en") ->
     data =
         format: "html"
         key: "" # place google translate api key here
