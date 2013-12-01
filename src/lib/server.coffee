@@ -6,16 +6,17 @@ server.coffee - starts application server
 ###
 
 # nko              = require "nko", "MgCWyiZUBOtGD97E"
-fs               = require "fs"
-{createServer}   = require "http"
-express          = require "express"
-io               = require "socket.io"
-sockets          = require "./sockets"
-bindRoutes       = require "./routes"
-app              = express()
-server           = createServer app
-isProduction     = process.env.NODE_ENV is "production"
-port             = if isProduction then 80 else 8000
+fs             = require "fs"
+{createServer} = require "http"
+express        = require "express"
+io             = require "socket.io"
+sockets        = require "./sockets"
+bindRoutes     = require "./routes"
+app            = express()
+server         = createServer app
+isProduction   = process.env.NODE_ENV is "production"
+port           = process.env.OPENSHIFT_NODEJS_PORT or 8000
+host           = process.env.OPENSHIFT_NODEJS_IP or "127.0.0.1"
 
 # attach router to app instance
 bindRoutes app
@@ -28,7 +29,7 @@ app.configure ->
   app.use express.favicon "#{__dirname}/../public/favicon.png"
   app.use express.static "#{__dirname}/../public"
 # start server
-server.listen port, (err) ->
+server.listen port, host, (err) ->
   if err
     console.log err
     process.exit -1

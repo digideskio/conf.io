@@ -4,6 +4,8 @@ This application enables speakers to deliver real-time video seminars to over
 250 participants at once and transcribes the speaker's voice into text and 
 translates it into the language of each individual participant.
 
+To see a demo, check out http://confio-gordonwritescode.rhcloud.com/
+
 > This repository exists for historical purposes. **It will not be actively 
 > maintained**. However, it is also here for your hacking pleasure so feel free
 > to fork and use any part as the basis for your project or pick the bits from
